@@ -80,6 +80,7 @@
     <string name="andesui_demoapp_screen_coachmark">Andes UI: Coachmark</string>
     <string name="andesui_demoapp_screen_radiobutton">Andes UI: RadioButton</string>
     <string name="andesui_demoapp_screen_thumbnail">Andes UI: Thumbnail</string>
+    <string name="andesui_demoapp_screen_feedbackinapp">Andes UI: FeedbackInApp</string>
     <string name="andesui_demoapp_screen_whatsnew">Andes UI: What\'s new?</string>
     <string name="andesui_demoapp_changelog_error">What\'s New couldn\'t be loaded, please contact our support team.</string>
     <string name="andesui_demoapp_label_showcase">Showcase</string>
@@ -220,6 +221,12 @@
     <string name="andesui_demoapp_bottom_sheet_dummy_view">This is a dummy view</string>
 
     <string name="andesui_demoapp_loading_title">Click the button to show the spinner</string>
+
+    <string name="andesui_demoapp_feedbackinapp">Andes FeedbackInApp</string>
+    <string name="andesui_feedbackinapp_button">Ayudanos a mejorar</string>
+    <string name="andesui_feedbackinapp_text">¿Encontraste lo que buscabas?</string>
+
+
 
     <string-array name="state_spinner">
         <item>Neutral</item>

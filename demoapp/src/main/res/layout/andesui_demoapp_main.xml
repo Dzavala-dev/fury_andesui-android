@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -210,6 +211,18 @@
             app:andesButtonText="@string/andesui_demoapp_thumbnail"
             app:layout_constraintTop_toBottomOf="@id/andesui_textfield" />
 
+        <com.mercadolibre.android.andesui.button.AndesButton
+            android:id="@+id/andesui_feedbackinapp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/button_margin_vertical"
+            android:layout_marginTop="@dimen/button_margin_vertical"
+            android:layout_marginRight="@dimen/button_margin_vertical"
+            app:andesButtonHierarchy="loud"
+            app:andesButtonSize="large"
+            app:andesButtonText="@string/andesui_demoapp_feedbackinapp"
+            app:layout_constraintTop_toBottomOf="@id/andesui_thumbnail" />
+
         <TextView
             android:id="@+id/andesui_demoapp_label_more"
             android:layout_width="wrap_content"
@@ -219,7 +232,7 @@
             android:layout_marginRight="@dimen/button_margin_vertical"
             android:text="@string/andesui_demoapp_label_more"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/andesui_thumbnail" />
+            app:layout_constraintTop_toBottomOf="@id/andesui_feedbackinapp" />
 
         <com.mercadolibre.android.andesui.button.AndesButton
             android:id="@+id/andesui_demoapp_contribution"
@@ -243,7 +256,9 @@
             app:andesButtonHierarchy="quiet"
             app:andesButtonSize="large"
             app:andesButtonText="@string/andesui_demoapp_label_andes_specs"
-            app:layout_constraintTop_toBottomOf="@id/andesui_demoapp_contribution" />
+            app:layout_constraintTop_toBottomOf="@id/andesui_demoapp_contribution" >
+
+        </com.mercadolibre.android.andesui.button.AndesButton>
 
     </android.support.constraint.ConstraintLayout>
   

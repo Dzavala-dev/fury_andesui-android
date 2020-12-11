@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <declare-styleable name="AndesFIA" tools:ignore="ResourceName">
+        <attr name="andesFIAHierarchy" format="enum">
+            <enum name="loud" value="100" />
+            <enum name="quiet" value="101" />
+            <enum name="transparent" value="102" />
+        </attr>
+
+        <attr name="andesFIASize" format="enum">
+            <enum name="large" value="200" />
+            <enum name="medium" value="201" />
+            <enum name="small" value="202" />
+        </attr>
+
+        <attr name="bodyAlign" format="enum">
+            <enum name="left" value="1000" />
+            <enum name="right" value="1001" />
+            <enum name="center" value="1002" />
+        </attr>
+
+        <attr name="andesActionStatus" format="enum">
+            <enum name="selected" value="2000" />
+            <enum name="unselected" value="2001" />
+            <enum name="undefined" value="2002" />
+        </attr>
+
+        <attr name="andesFIAType" format="enum">
+            <enum name="idle" value="3000" />
+            <enum name="disabled" value="3001" />
+            <enum name="error" value="3002" />
+        </attr>
+
+        <attr name="andesFIABodyText" format="reference" />
+
+        <attr name="andesFIAShowTopDivider" format="boolean" />
+
+        <attr name="andesFIAText" format="reference" />
+
+        <attr name="andesFIATitleText" format="reference" />
+
+
+    </declare-styleable>
+
+</resources>

@@ -84,6 +84,7 @@ dependencies {
     implementation showcase.glide
     implementation showcase.markwon
     debugImplementation showcase.leakCanary
+    implementation 'com.android.support:support-v4:28.0.0'
 }
 
 /**

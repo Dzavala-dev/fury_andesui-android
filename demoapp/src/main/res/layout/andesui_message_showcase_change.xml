@@ -97,9 +97,9 @@
             android:id="@+id/change_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/button_margin_vertical"
             app:andesButtonHierarchy="loud"
             app:andesButtonSize="large"
-            android:layout_marginTop="@dimen/button_margin_vertical"
             app:andesButtonText="@string/andes_message_showcase_change" />
 
     </LinearLayout>

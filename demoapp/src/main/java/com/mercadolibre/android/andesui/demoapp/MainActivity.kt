@@ -70,6 +70,9 @@ class MainActivity : AppCompatActivity() {
         andesui_bottom_sheet.setOnClickListener {
             startActivity(SafeIntent(this,"meli://andes/bottom_sheet"))
         }
+        andesui_feedbackinapp.setOnClickListener {
+            startActivity(SafeIntent(this,"meli://andes/feedbackinapp"))
+        }
     }
 
     private fun setupExtras() {
