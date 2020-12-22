@@ -3,33 +3,29 @@ package com.mercadolibre.android.andesui.feedbackinapp.factory
 import android.content.Context
 import android.util.AttributeSet
 import com.mercadolibre.android.andesui.R
-import com.mercadolibre.android.andesui.feedbackinapp.size.AndesFeedbackInAppSize
-import com.mercadolibre.android.andesui.feedbackinapp.hierarchy.AndesFIAppHierarchy
+import com.mercadolibre.android.andesui.feedbackinapp.hierarchy.AndesFeedbackInAppHierarchy
+import com.mercadolibre.android.andesui.button.size.AndesButtonSize
 import com.mercadolibre.android.andesui.feedbackinapp.align.AndesFIAppAlign
-import com.mercadolibre.android.andesui.feedbackinapp.status.AndesActionStatus
-import com.mercadolibre.android.andesui.feedbackinapp.type.AndesFIAType
-import com.mercadolibre.android.andesui.feedbackinapp.bodylinks.AndesActionLinks
+import com.mercadolibre.android.andesui.message.bodylinks.AndesBodyLinks
 
 /**
  * The data class that contains the public components of the button.
  */
 internal data class FeedbackInAppAttrs(
-        val andesFIAHierarchy: AndesFIAppHierarchy,
-        val andesFIAType: AndesFIAType,
+        val andesFeedbackInAppHierarchy: AndesFeedbackInAppHierarchy,
         val descriptionText: String?,
-        val descriptionTextAlign: AndesFIAppAlign,
-        val andesActionStatus: AndesActionStatus,
-        val andesFIASize: AndesFeedbackInAppSize,
-        val showTopDivider: Boolean,
-        val bodyLinks: AndesActionLinks?
-
+        val showTopDivider: Boolean?,
+        //val descriptionSize: AndesButtonSize,
+        val descriptionTextAlignment: AndesFIAppAlign = AndesFIAppAlign.CENTER,
+        //val setBackgroundColor: String?,
+        val action: Boolean = true,
+val linkText: String?
 )
 
 /**
  * This object parse the attribute set and return an instance of AndesButtonAttrs to be used by AndesButton
  */
 internal object FeedbackInAppAttrsParser {
-
 
     private const val ANDES_FIA_HIERARCHY_LOUD = "100"
     private const val ANDES_FIA_HIERARCHY_QUIET = "101"
@@ -43,68 +39,40 @@ internal object FeedbackInAppAttrsParser {
     private const val ANDES_FIA_ALIGN_RIGHT = "1001"
     private const val ANDES_FIA_ALIGN_CENTER = "1002"
 
-    private const val ANDES_FIA_STATUS_SELECTED = "2000"
-    private const val ANDES_FIA_STATUS_UNSELECTED = "2001"
-    private const val ANDES_FIA_STATUS_UNDEFINED = "2002"
-
-    private const val ANDES_FIA_TYPE_IDLE = "3000"
-    private const val ANDES_FIA_TYPE_DISABLED = "3001"
-    private const val ANDES_FIA_TYPE_ERROR = "3002"
-
 
     fun parse(context: Context, attr: AttributeSet?): FeedbackInAppAttrs {
-        val typedArray = context.obtainStyledAttributes(attr, R.styleable.AndesFIA)
+        val typedArray = context.obtainStyledAttributes(attr, R.styleable.AndesFeedbackInApp)
 
-        val align = when (typedArray.getString(R.styleable.AndesFIA_bodyAlign)) {
+        val align = when (typedArray.getString(R.styleable.AndesFeedbackInApp_andesFeedbackInAppAlign)) {
             ANDES_FIA_ALIGN_LEFT -> AndesFIAppAlign.LEFT
             ANDES_FIA_ALIGN_RIGHT -> AndesFIAppAlign.RIGHT
             ANDES_FIA_ALIGN_CENTER -> AndesFIAppAlign.CENTER
             else -> AndesFIAppAlign.CENTER
         }
 
-        val hierarchy = when (typedArray.getString(R.styleable.AndesFIA_andesFIAHierarchy)) {
-            ANDES_FIA_HIERARCHY_LOUD -> AndesFIAppHierarchy.LOUD
-            ANDES_FIA_HIERARCHY_QUIET -> AndesFIAppHierarchy.QUIET
-            ANDES_FIA_HIERARCHY_TRANSPARENT -> AndesFIAppHierarchy.TRANSPARENT
-            else -> AndesFIAppHierarchy.LOUD
+        val hierarchy = when (typedArray.getString(R.styleable.AndesFeedbackInApp_andesFeedbackInAppHierarchy)) {
+            ANDES_FIA_HIERARCHY_LOUD -> AndesFeedbackInAppHierarchy.LOUD
+            ANDES_FIA_HIERARCHY_QUIET -> AndesFeedbackInAppHierarchy.QUIET
+            ANDES_FIA_HIERARCHY_TRANSPARENT -> AndesFeedbackInAppHierarchy.TRANSPARENT
+            else -> AndesFeedbackInAppHierarchy.TRANSPARENT
         }
 
-        val status = when (typedArray.getString(R.styleable.AndesFIA_andesActionStatus)) {
-            ANDES_FIA_STATUS_SELECTED -> AndesActionStatus.SELECTED
-            ANDES_FIA_STATUS_UNSELECTED -> AndesActionStatus.UNSELECTED
-            ANDES_FIA_STATUS_UNDEFINED -> AndesActionStatus.UNDEFINED
-            else -> AndesActionStatus.UNSELECTED
-        }
-
-        val size = when (typedArray.getString(R.styleable.AndesFIA_andesFIASize)) {
-            ANDES_FIA_SIZE_LARGE -> AndesFeedbackInAppSize.LARGE
-            ANDES_FIA_SIZE_MEDIUM -> AndesFeedbackInAppSize.MEDIUM
-            ANDES_FIA_SIZE_SMALL -> AndesFeedbackInAppSize.SMALL
-            else -> AndesFeedbackInAppSize.MEDIUM
-        }
-
-        val type = when (typedArray.getString(R.styleable.AndesFIA_andesFIAType)) {
-            ANDES_FIA_TYPE_IDLE -> AndesFIAType.IDLE
-            ANDES_FIA_TYPE_DISABLED -> AndesFIAType.DISABLED
-            ANDES_FIA_TYPE_ERROR -> AndesFIAType.ERROR
-            else -> AndesFIAType.IDLE
-        }
-
-        val validatedStatus = if (type == AndesFIAType.ERROR) {
-            AndesActionStatus.UNSELECTED
-        } else {
-            status
+        val size = when (typedArray.getString(R.styleable.AndesButton_andesButtonSize)) {
+            ANDES_FIA_SIZE_LARGE -> AndesButtonSize.LARGE
+            ANDES_FIA_SIZE_MEDIUM -> AndesButtonSize.MEDIUM
+            ANDES_FIA_SIZE_SMALL -> AndesButtonSize.SMALL
+            else -> AndesButtonSize.MEDIUM
         }
 
         return FeedbackInAppAttrs(
-                andesFIAHierarchy = AndesFIAppHierarchy.TRANSPARENT,
-                andesFIAType = type,
-                descriptionText = typedArray.getString(R.styleable.AndesFIA_andesFIABodyText),
-                descriptionTextAlign = align,
-                andesActionStatus = validatedStatus,
-                andesFIASize = size,
-                showTopDivider = typedArray.getBoolean(R.styleable.AndesFIA_andesFIAShowTopDivider, false),
-                bodyLinks = null
+                andesFeedbackInAppHierarchy = hierarchy,
+                descriptionText = typedArray.getString(R.styleable.AndesFeedbackInApp_andesFeedbackInAppBodyText),
+                //descriptionSize = size,
+                action = typedArray.getBoolean(R.styleable.AndesButton_andesButtonEnabled, true),
+                descriptionTextAlignment = align,
+                showTopDivider = typedArray.getBoolean(R.styleable.AndesFeedbackInApp_andesFIAShowTopDivider, false),
+                //setBackgroundColor: String?
+                linkText = typedArray.getString(R.styleable.AndesFeedbackInApp_andesFeedbackInAppButtonText)
         ).also { typedArray.recycle() }
     }
 }

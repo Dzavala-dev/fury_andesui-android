@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:parentTag="android.support.v7.widget.CardView">
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/andes_feedback_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:animateLayoutChanges="true"
+        android:visibility="visible">
+
+        <View
+            android:id="@+id/andes_feedback_divider"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_margin="@dimen/andes_feedback_divider_margin"
+            android:layout_marginStart="@dimen/andes_feedback_buttonmarginStart"
+            android:layout_marginEnd="@dimen/andes_feedback_dividermarginEnd"
+            android:layout_marginBottom="@dimen/andes_feedback_divider_margin"
+            android:background="@color/andes_gray_450_solid"
+            android:visibility="visible"
+            app:layout_constraintBottom_toTopOf="@+id/andes_feedbackinapp_message" />
+
+        <TextView
+            android:id="@+id/andes_feedbackinapp_message"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="17dp"
+            android:gravity="center_horizontal"
+            android:textColor="#73000000"
+            android:textIsSelectable="false"
+            android:visibility="visible"
+            app:layout_constraintBottom_toTopOf="@+id/andes_feedback_button"
+            app:layout_constraintTop_toTopOf="@id/andes_feedback_divider" />
+
+        <com.mercadolibre.android.andesui.button.AndesButton
+            android:id="@+id/andes_feedback_button"
+            android:layout_width="match_parent"
+            android:layout_height="32dp"
+            android:layout_marginStart="@dimen/andes_feedback_buttonmarginStart"
+            android:layout_marginTop="@dimen/andes_feedback_buttondividermarginTop"
+            android:layout_marginEnd="@dimen/andes_feedback_buttondividermarginEnd"
+            android:layout_marginBottom="7dp"
+            android:gravity="center_horizontal"
+            app:andesButtonHierarchy="transparent"
+            app:andesButtonSize="medium"
+            app:layout_constraintTop_toBottomOf="@+id/andes_feedbackinapp_message"
+            tools:visibility="visible" />
+
+
+    </android.support.constraint.ConstraintLayout>
+</merge>

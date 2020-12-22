@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!--Text body-->
+    <dimen name="andes_feedback_bodymarginStart">50dp</dimen>
+    <dimen name="andes_feedback_bodymarginTop">16dp</dimen>
+    <dimen name="andes_feedback_bodymarginEnd">50dp</dimen>
+
+    <dimen name="andes_feedbackinapp_height">4dp</dimen>
+    <dimen name="andes_feedbackinapp_width">40dp</dimen>
+
+    <!--Text divider-->
+    <dimen name="andes_feedback_dividermarginStart">20dp</dimen>
+    <dimen name="andes_feedback_divider_margin">16dp</dimen>
+    <dimen name="andes_feedback_dividermarginEnd">20dp</dimen>
+
+    <dimen name="andes_feedbackinapp_sheet_drag_divider_height">4dp</dimen>
+    <dimen name="andes_feedbackinapp_sheet_drag_divider_width">4dp</dimen>
+    <dimen name="andes_feedbackinapp_padding">10dp</dimen>
+
+
+    <!--Text button-->
+    <dimen name="andes_feedback_buttonmarginStart">117dp</dimen>
+    <dimen name="andes_feedback_buttondividermarginEnd">117dp</dimen>
+    <dimen name="andes_feedback_buttondividermarginTop">17dp</dimen>
+
+
+
+</resources>

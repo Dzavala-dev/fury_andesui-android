@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <LinearLayout
+        android:id="@+id/show_Top_Divider"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:animateLayoutChanges="true"
+        android:background="#ededed"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:padding="@dimen/andes_feedbackinapp_padding">
+
+
+        <com.mercadolibre.android.andesui.feedbackinapp.AndesFeedbackInApp
+            android:id="@+id/feedback"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:animateLayoutChanges="true"
+            app:andesFeedbackInAppBodyText="@string/andesui_feedbackinapp_text"
+            app:andesFeedbackInAppButtonText="@string/andesui_feedbackinapp_button"
+            app:andesFeedbackInAppHierarchy="transparent"
+            app:andesFeedbackInAppSize="medium"
+            app:cardBackgroundColor="#ededed">
+
+        </com.mercadolibre.android.andesui.feedbackinapp.AndesFeedbackInApp>
+
+    </LinearLayout>
+
+</ScrollView>
