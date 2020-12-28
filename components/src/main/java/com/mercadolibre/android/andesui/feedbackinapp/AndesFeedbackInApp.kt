@@ -1,58 +1,49 @@
 package com.mercadolibre.android.andesui.feedbackinapp
 
-import android.content.ClipDescription
 import android.content.Context
 import android.support.constraint.ConstraintLayout
 import android.support.v7.widget.CardView
-import android.text.SpannableString
-import android.text.method.LinkMovementMethod
 import android.util.AttributeSet
-import android.util.Log
-import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.TextView
 import com.mercadolibre.android.andesui.R
 import com.mercadolibre.android.andesui.button.AndesButton
-import com.mercadolibre.android.andesui.feedbackinapp.align.AndesFIAppAlign
+import com.mercadolibre.android.andesui.feedbackinapp.align.AndesFeedbackInAppAlign
 import com.mercadolibre.android.andesui.feedbackinapp.factory.FeedbackInAppAttrs
-import com.mercadolibre.android.andesui.feedbackinapp.hierarchy.AndesFeedbackInAppHierarchy
 import com.mercadolibre.android.andesui.feedbackinapp.factory.FeedbackInAppAttrsParser
 import com.mercadolibre.android.andesui.feedbackinapp.factory.FeedbackInAppConfiguration
 import com.mercadolibre.android.andesui.feedbackinapp.factory.FeedbackInAppConfigurationFactory
-import com.mercadolibre.android.andesui.message.factory.AndesMessageConfiguration
-import com.mercadolibre.android.andesui.typeface.getFontOrDefault
 
 
 @Suppress("TooManyFunctions")
 class AndesFeedbackInApp : CardView {
 
     /**
-     * Getter and setter for [hierarchy].
+     * Getter and setter for [message].
      */
-    var hierarchy: AndesFeedbackInAppHierarchy
-        get() = andesFeedbackInAppAttrs.andesFeedbackInAppHierarchy
+    var message: String?
+        get() = andesFeedbackInAppAttrs.message
         set(value) {
-            andesFeedbackInAppAttrs = andesFeedbackInAppAttrs.copy(andesFeedbackInAppHierarchy = value)
-        }
-
-    /**
-     * Getter and setter for [body].
-     */
-    var body: String?
-        get() = andesFeedbackInAppAttrs.descriptionText
-        set(value) {
-            andesFeedbackInAppAttrs = andesFeedbackInAppAttrs.copy(descriptionText = value)
+            andesFeedbackInAppAttrs = andesFeedbackInAppAttrs.copy(message = value)
             setupBodyComponent(createConfig())
         }
 
+    /**
+     * Getter and setter for [buttonLabel].
+     */
+    var buttonLabel: String?
+        get() = andesFeedbackInAppAttrs.buttonLabel
+        set(value) {
+            andesFeedbackInAppAttrs = andesFeedbackInAppAttrs.copy(buttonLabel = value)
+            setupLinkAction(createConfig())
+        }
 
     private lateinit var feedbackContainer: ConstraintLayout
     lateinit var feedbackinappMessage: TextView
     private lateinit var feedbackdivider: View
     private lateinit var andesFeedbackInAppAttrs: FeedbackInAppAttrs
     private lateinit var linkAction: AndesButton
-
 
 
     @Suppress("unused")
@@ -66,22 +57,18 @@ class AndesFeedbackInApp : CardView {
         initAttrs(attrs)
     }
 
-    constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : super(context, attrs) {
-        initAttrs(attrs)
-    }
-
     @Suppress("unused", "LongParameterList")
     constructor(
             context: Context,
-            hierarchy: AndesFeedbackInAppHierarchy = HIERARCHY_DEFAULT,
-            body: String,
+            message: String,
             showTopDivider: Boolean = ShowTopDivider_DEFAULT,
-            descriptionTextAlignment: AndesFIAppAlign,
-            action: Boolean = Action_DEFAULT,
-            linkText: String
+            descriptionTextAlignment: AndesFeedbackInAppAlign,
+            feedbackInAppBackgroundColor: String,
+            deeplink: String?,
+            buttonLabel: String?
 
     ) : super(context) {
-        initAttrs(hierarchy, body, showTopDivider,  descriptionTextAlignment, action, linkText)
+        initAttrs(message, showTopDivider, descriptionTextAlignment, feedbackInAppBackgroundColor, deeplink, buttonLabel)
     }
 
     /**
@@ -91,23 +78,22 @@ class AndesFeedbackInApp : CardView {
      */
     private fun initAttrs(attrs: AttributeSet?) {
         andesFeedbackInAppAttrs = FeedbackInAppAttrsParser.parse(context, attrs)
-        val config = FeedbackInAppConfigurationFactory.create(context, andesFeedbackInAppAttrs)
-        setupComponents(config)
+        setupComponents()
     }
 
     @Suppress("LongParameterList")
     private fun initAttrs(
-            hierarchy: AndesFeedbackInAppHierarchy,
-            body: String,
+            message: String,
             showTopDivider: Boolean = ShowTopDivider_DEFAULT,
-            descriptionTextAlignment: AndesFIAppAlign,
-            action: Boolean = Action_DEFAULT,
-            linkText: String
+            descriptionTextAlignment: AndesFeedbackInAppAlign,
+            feedbackInAppBackgroundColor: String,
+            deeplink: String?,
+            buttonLabel: String?
 
     ) {
-        andesFeedbackInAppAttrs = FeedbackInAppAttrs(hierarchy, body, showTopDivider, descriptionTextAlignment, action, linkText)
+        andesFeedbackInAppAttrs = FeedbackInAppAttrs(message, showTopDivider, descriptionTextAlignment, feedbackInAppBackgroundColor, deeplink, buttonLabel)
         val config = FeedbackInAppConfigurationFactory.create(context, andesFeedbackInAppAttrs)
-        setupComponents(config)
+        setupComponents()
     }
 
     /**
@@ -115,16 +101,10 @@ class AndesFeedbackInApp : CardView {
      * Is like a choreographer ;)
      *
      */
-    private fun setupComponents(config: FeedbackInAppConfiguration) {
+    private fun setupComponents() {
 
         initComponents()
         setupViewId()
-
-        setupColorComponents(config)
-    }
-
-    private fun setupColorComponents(config: FeedbackInAppConfiguration) {
-        setupBodyComponent(config)
     }
 
     /**
@@ -138,7 +118,7 @@ class AndesFeedbackInApp : CardView {
 
         feedbackContainer = container.findViewById(R.id.andes_feedback_container)
         feedbackinappMessage = container.findViewById(R.id.andes_feedbackinapp_message)
-        feedbackdivider= container.findViewById(R.id.andes_feedback_divider)
+        feedbackdivider = container.findViewById(R.id.andes_feedback_divider)
         linkAction = container.findViewById(R.id.andes_feedback_button)
     }
 
@@ -157,33 +137,21 @@ class AndesFeedbackInApp : CardView {
      *
      */
     private fun setupBodyComponent(config: FeedbackInAppConfiguration) {
-        if (config.descriptionText.isNullOrEmpty()) {
-            feedbackContainer.visibility = View.GONE
-            Log.e("Body", "Message cannot be visualized with null or empty body")
-        } else {
-            feedbackContainer.visibility = View.VISIBLE
-            feedbackinappMessage.text = getBodyText(config.descriptionText, config)
-            feedbackinappMessage.setTextSize(TypedValue.COMPLEX_UNIT_PX, config.descriptionSize)
 
-            linkAction.text = config.linkText
+        feedbackinappMessage.text = config.feedbackInAppMessageText
 
-        }
     }
 
-    private fun getBodyText(text: String, config: FeedbackInAppConfiguration): SpannableString {
-        val spannableString = SpannableString(text)
+    fun setupLinkAction(config: FeedbackInAppConfiguration) {
 
-        feedbackinappMessage.movementMethod = LinkMovementMethod.getInstance()
+        linkAction.text = config.buttonLabel
 
-        return spannableString
     }
-
 
     private fun createConfig() = FeedbackInAppConfigurationFactory.create(context, andesFeedbackInAppAttrs)
 
     companion object {
-        private val HIERARCHY_DEFAULT = AndesFeedbackInAppHierarchy.TRANSPARENT
+
         private const val ShowTopDivider_DEFAULT = false
-        private const val Action_DEFAULT = false
     }
 }

@@ -38,21 +38,27 @@ class FeedbackInAppActivity : AppCompatActivity() {
         indicator.attach(viewPager)
 
     }
+
     class AndesShowcasePagerAdapter(private val context: Context) : PagerAdapter() {
         var views: List<View>
+
         init {
             views = initViews()
         }
+
         override fun instantiateItem(container: ViewGroup, position: Int): View {
             container.addView(views[position])
             return views[position]
         }
+
         override fun destroyItem(container: ViewGroup, position: Int, view: Any) {
             container.removeView(view as View?)
         }
+
         override fun isViewFromObject(view: View, other: Any): Boolean {
             return view == other
         }
+
         override fun getCount(): Int = views.size
 
         private fun initViews(): List<View> {
@@ -62,16 +68,16 @@ class FeedbackInAppActivity : AppCompatActivity() {
 
             return listOf(feedbackLayout)
         }
+
         private fun addLayoutFeedbackInApp(inflater: LayoutInflater): View {
-            val layoutFeedbackChange = inflater.inflate (
+            val layoutFeedbackChange = inflater.inflate(
                     R.layout.andesui_feedbackinapp_change,
 
-                null,
-                false
-        ) as ScrollView
+                    null,
+                    false
+            ) as ScrollView
 
             val feedbackMessage = layoutFeedbackChange.findViewById<AndesFeedbackInApp>(R.id.feedback)
-
 
             return layoutFeedbackChange
         }

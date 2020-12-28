@@ -37,14 +37,6 @@ internal sealed class AndesFeedbackInAppHierarchyInterface {
      */
     abstract fun textColor(context: Context): ColorStateList
 
-
-    /**
-     * Returns the [Typeface] that should be used for the text inside the [AndesButton].
-     *
-     * @param context needed for accessing some resources. In this case, for accessing the kotlin extension defines for the context.
-     * @return the [Typeface] that should be used for the text inside the [AndesButton].
-     */
-    fun typeface(context: Context): Typeface = context.getFontOrDefault(R.font.andes_font_semibold)
 }
 
 /**

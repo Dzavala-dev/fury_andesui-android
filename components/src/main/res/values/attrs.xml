@@ -21,7 +21,7 @@
             <enum name="center" value="1002" />
         </attr>
 
-        <attr name="andesFIAShowTopDivider" format="boolean" />
+        <attr name="andesFeedbackInAppShowTopDivider" format="boolean" />
 
         <attr name="andesFeedbackInAppBodyText" format="reference" />
         <attr name="andesFeedbackInAppButtonText" format="reference" />
